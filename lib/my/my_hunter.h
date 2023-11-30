@@ -8,30 +8,53 @@
 */
 
 #ifndef MY_HUNTER_H_
-#define MY_HUNTER_H_
-#include <SFML/Graphics.h>
-#include <SFML/Audio.h>
-#include <SFML/System.h>
-#include <SFML/Window.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <unistd.h>
-#include <time.h>
-#include <dirent.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <sys/syscall.h>
-#include <unistd.h>
-#include <stdarg.h>
-#include <pwd.h>
-#include <grp.h>
+    #define MY_HUNTER_H_
+    #include <SFML/Graphics.h>
+    #include <SFML/Audio.h>
+    #include <SFML/System.h>
+    #include <SFML/Window.h>
+    #include <stdlib.h>
+    #include <stdio.h>
+    #include <unistd.h>
+    #include <time.h>
+    #include <dirent.h>
+    #include <sys/types.h>
+    #include <sys/stat.h>
+    #include <sys/syscall.h>
+    #include <unistd.h>
+    #include <stdarg.h>
+    #include <pwd.h>
+    #include <grp.h>
 
-typedef struct sprite_s {
-    sfSprite *sprite;
-    sfTexture *texture;
-    sfVector2f pos;
+typedef struct window {
+    sfRenderWindow *window;
+    sfVideoMode mode;
+    sfEvent event;
+    char *title;
+} window_t;
+
+typedef struct textures {
+    sfTexture *menu_texture;
+    sfSprite *menu_sprite;
+    sfTexture *game_texture;
+    sfSprite *game_sprite;
+} textures_t;
+
+typedef struct mob {
+    sfClock *clock;
+    sfTime time;
+    float seconds;
     sfIntRect rect;
-} sprite_s_t;
+    float x;
+    float y;
+    sfTexture *sprite_texture;
+    sfSprite *sprite;
+    sfMusic *hit;
+}mob_t;
+
+typedef struct music {
+    sfMusic *music;
+}music_t;
 
 int mini_printf(char const *format, ...);
 int my_put_nbr(int nb);
@@ -42,8 +65,13 @@ int format_integer(int i, char const *format, va_list list, int count);
 int format_string(int i, char const *format, va_list list , int count);
 int format_char(int i, char const *format, va_list list, int count);
 int format_modulo(int i, char const *format, va_list list, int count);
-
-char *screen_create(sfVideoMode mode, char *title);
-char *screen_display(sfRenderWindow *window);
+void render_window(void);
+void init_windows(window_t *window);
+void init_textures(textures_t *textures);
+int error_texture(textures_t *textures, mob_t *mob);
+void event_manager(sfRenderWindow *window, sfEvent event, mob_t *mob);
+void init_mob(mob_t *mob);
+void mob_animation(mob_t *mob);
+void init_music(music_t *music);
 
 #endif /* !MY_HUNTER_H_ */

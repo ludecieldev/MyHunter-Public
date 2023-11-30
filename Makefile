@@ -5,8 +5,16 @@
 ## Makefile
 ##
 
-SRC	=	src/functions/screen_display.c	\
-		src/main/main.c
+SRC	=	src/main/render_window.c \
+		lib/my/mini_printf.c \
+		src/main/main.c \
+		lib/my/my_putchar.c \
+		lib/my/my_putstr.c \
+		lib/my/my_put_nbr.c \
+		lib/my/my_strlen.c	\
+		src/main/init.c	\
+		src/main/event_manager.c	\
+		src/main/animation.c
 
 OBJ	=	$(SRC:.c=.o)
 
@@ -15,7 +23,8 @@ NAME	=	my_hunter
 CFLAGS	+=	-W -Wall -Wextra
 
 all:
-	gcc -o $(NAME) $(SRC) -lcsfml-graphics -lcsfml-window -lcsfml-system -lcsfml-audio
+	gcc -o $(NAME) $(SRC) -lcsfml-graphics -lcsfml-window \
+	-lcsfml-system -lcsfml-audio -g3
 clean:
 	rm -f $(OBJ)
 
