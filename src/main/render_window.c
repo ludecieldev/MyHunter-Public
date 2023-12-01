@@ -9,7 +9,7 @@
 
 #include "../../lib/my/my_hunter.h"
 
-void destroy_all(window_t *window, textures_t *textures, mob_t *mob, music_t *music)
+void desall(window_t *window, textures_t *textures, mob_t *mob, music_t *music)
 {
     sfRenderWindow_destroy(window->window);
     sfTexture_destroy(textures->game_texture);
@@ -51,8 +51,7 @@ void render_window(void)
     if (error_texture(&textures, &mob) == 84)
         return;
     sfRenderWindow_setFramerateLimit(window.window, 144);
-    while (sfRenderWindow_isOpen(window.window)) {
+    while (sfRenderWindow_isOpen(window.window))
         while_short(&window, &textures, &mob);
-    }
-    destroy_all(&window, &textures, &mob ,&music);
+    desall(&window, &textures, &mob, &music);
 }

@@ -16,6 +16,7 @@ void replace_mouse_scope(sfRenderWindow *window, sfEvent event)
     sfSprite *mouse_scope = sfSprite_create();
     sfTexture *mouse_scope_texture = sfTexture_createFromFile(
         "assets/mouse_scope.png", NULL);
+
     sfSprite_setScale(mouse_scope, (sfVector2f){0.3, 0.3});
     sfSprite_setTexture(mouse_scope, mouse_scope_texture, sfTrue);
     sfSprite_setPosition(mouse_scope, mouse_pos_f);

@@ -29,7 +29,8 @@ void check_player_position(window_t *window, sfEvent event, mob_t *mob)
     my_putstr(" Y = ");
     my_put_nbr(mob->y);
     my_putchar('\n');
-    if (event.mouseButton.x >= mob->x && event.mouseButton.x <= mob->x + SPRITE_WIDTH
+    if (event.mouseButton.x >= mob->x && event.mouseButton.x
+    <= mob->x + SPRITE_WIDTH
         && event.mouseButton.y >= mob->y && event.mouseButton.y
         <= mob->y + SPRITE_HEIGHT) {
         mob->x = -200;
