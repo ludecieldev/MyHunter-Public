@@ -9,24 +9,29 @@
 
 #include "../../lib/my/my_hunter.h"
 
-void destroy_all(window_t *window, textures_t *textures, mob_t *mob)
+void destroy_all(window_t *window, textures_t *textures, mob_t *mob, music_t *music)
 {
     sfRenderWindow_destroy(window->window);
-    sfTexture_destroy(textures->menu_texture);
-    sfSprite_destroy(textures->menu_sprite);
     sfTexture_destroy(textures->game_texture);
     sfSprite_destroy(textures->game_sprite);
     sfTexture_destroy(mob->sprite_texture);
     sfSprite_destroy(mob->sprite);
+    sfMusic_destroy(music->music);
+    sfClock_destroy(mob->clock);
+    sfFont_destroy(window->font);
+    sfText_destroy(window->score);
 }
 
 void while_short(window_t *window, textures_t *textures, mob_t *mob)
 {
-    event_manager(window->window, window->event, mob);
+    event_manager(window, window->event, mob);
     sfRenderWindow_clear(window->window, sfBlack);
     sfRenderWindow_drawSprite(window->window, textures->game_sprite, NULL);
     sfRenderWindow_drawSprite(window->window, mob->sprite, NULL);
+    sfRenderWindow_setMouseCursorVisible(window->window, sfFalse);
     mob_animation_classic(mob);
+    replace_mouse_scope(window->window, window->event);
+    score_management(window, mob);
     sfRenderWindow_display(window->window);
 }
 
@@ -49,5 +54,5 @@ void render_window(void)
     while (sfRenderWindow_isOpen(window.window)) {
         while_short(&window, &textures, &mob);
     }
-    destroy_all(&window, &textures, &mob);
+    destroy_all(&window, &textures, &mob ,&music);
 }

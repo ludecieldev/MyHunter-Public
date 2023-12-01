@@ -15,13 +15,13 @@ void init_windows(window_t *window)
     window->mode.height = 1024;
     window->mode.bitsPerPixel = 32;
     window->title = "My Hunter";
+    window->font = sfFont_createFromFile("assets/font.TTF");
+    window->score = sfText_create();
+    sfText_setFont(window->score, window->font);
 }
 
 void init_textures(textures_t *textures)
 {
-    textures->menu_texture = sfTexture_createFromFile("assets/g_m.png", NULL);
-    textures->menu_sprite = sfSprite_create();
-    sfSprite_setTexture(textures->menu_sprite, textures->menu_texture, sfTrue);
     textures->game_texture = sfTexture_createFromFile("assets/back.png", NULL);
     textures->game_sprite = sfSprite_create();
     sfSprite_setTexture(textures->game_sprite, textures->game_texture, sfTrue);
@@ -51,6 +51,7 @@ void init_mob(mob_t *mob)
     mob->sprite_texture = sfTexture_createFromFile("assets/link_ltr.png",
     NULL);
     mob->sprite = sfSprite_create();
+    mob->nb_hit = 0;
     sfSprite_setPosition(mob->sprite, (sfVector2f){mob->x, mob->y});
     sfSprite_setTexture(mob->sprite, mob->sprite_texture, sfTrue);
     sfSprite_setTextureRect(mob->sprite, mob->rect);
@@ -58,8 +59,7 @@ void init_mob(mob_t *mob)
 
 int error_texture(textures_t *textures, mob_t *mob)
 {
-    if (!textures->menu_texture || !textures->menu_sprite ||
-    !textures->game_texture || !textures->game_sprite ||
+    if (!textures->game_texture || !textures->game_sprite ||
     !mob->sprite_texture || !mob->sprite)
         return (84);
     return (0);

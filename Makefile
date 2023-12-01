@@ -14,7 +14,11 @@ SRC	=	src/main/render_window.c \
 		lib/my/my_strlen.c	\
 		src/main/init.c	\
 		src/main/event_manager.c	\
-		src/main/animation.c
+		src/main/animation.c	\
+		src/main/mouse_scope.c	\
+		src/main/score_management.c	\
+		lib/my/my_int_to_arg.c	\
+		lib/my/my_revstr.c
 
 OBJ	=	$(SRC:.c=.o)
 

@@ -9,6 +9,8 @@
 
 #ifndef MY_HUNTER_H_
     #define MY_HUNTER_H_
+    #define SPRITE_WIDTH 100
+    #define SPRITE_HEIGHT 100
     #include <SFML/Graphics.h>
     #include <SFML/Audio.h>
     #include <SFML/System.h>
@@ -26,21 +28,22 @@
     #include <pwd.h>
     #include <grp.h>
 
-typedef struct window {
-    sfRenderWindow *window;
-    sfVideoMode mode;
-    sfEvent event;
-    char *title;
-} window_t;
-
 typedef struct textures {
-    sfTexture *menu_texture;
-    sfSprite *menu_sprite;
     sfTexture *game_texture;
     sfSprite *game_sprite;
     sfTexture *mouse_scope_texture;
     sfSprite *mouse_scope_sprite;
 } textures_t;
+
+typedef struct window {
+    sfRenderWindow *window;
+    sfVideoMode mode;
+    sfEvent event;
+    char *title;
+    sfVector2u size;
+    sfText *score;
+    sfFont *font;
+} window_t;
 
 typedef struct mob {
     sfClock *clock;
@@ -63,6 +66,8 @@ int my_put_nbr(int nb);
 void my_putchar(char c);
 int my_putstr(char const *str);
 int my_strlen(char const *str);
+char *my_revstr(char *str);
+char *my_itoa(int nb);
 int format_integer(int i, char const *format, va_list list, int count);
 int format_string(int i, char const *format, va_list list , int count);
 int format_char(int i, char const *format, va_list list, int count);
@@ -71,10 +76,12 @@ void render_window(void);
 void init_windows(window_t *window);
 void init_textures(textures_t *textures);
 int error_texture(textures_t *textures, mob_t *mob);
-void event_manager(sfRenderWindow *window, sfEvent event, mob_t *mob);
+void event_manager(window_t *window, sfEvent event, mob_t *mob);
 void init_mob(mob_t *mob);
 void mob_animation_classic(mob_t *mob);
 void init_music(music_t *music);
 void random_animation(mob_t *mob);
+void replace_mouse_scope(sfRenderWindow *window, sfEvent event);
+void score_management(window_t *window, mob_t *mob);
 
 #endif /* !MY_HUNTER_H_ */
