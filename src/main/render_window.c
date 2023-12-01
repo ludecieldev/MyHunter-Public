@@ -35,7 +35,7 @@ void while_short(window_t *window, textures_t *textures, mob_t *mob)
     sfRenderWindow_display(window->window);
 }
 
-void render_window(void)
+int render_window(void)
 {
     window_t window;
     textures_t textures;
@@ -48,10 +48,11 @@ void render_window(void)
     init_music(&music);
     window.window = sfRenderWindow_create(window.mode, window.title,
     sfResize | sfClose, NULL);
-    if (error_texture(&textures, &mob) == 84)
-        return;
+    if (error_texture(&textures, &mob, &music) == 84)
+        return (84);
     sfRenderWindow_setFramerateLimit(window.window, 144);
     while (sfRenderWindow_isOpen(window.window))
         while_short(&window, &textures, &mob);
     desall(&window, &textures, &mob, &music);
+    return (0);
 }

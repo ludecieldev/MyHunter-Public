@@ -57,10 +57,11 @@ void init_mob(mob_t *mob)
     sfSprite_setTextureRect(mob->sprite, mob->rect);
 }
 
-int error_texture(textures_t *textures, mob_t *mob)
+int error_texture(textures_t *textures, mob_t *mob, music_t *music)
 {
     if (!textures->game_texture || !textures->game_sprite ||
-    !mob->sprite_texture || !mob->sprite)
+    !textures->mouse_scope_texture || !textures->mouse_scope_sprite ||
+    !mob->sprite_texture || !mob->sprite || !music->music)
         return (84);
     return (0);
 }
