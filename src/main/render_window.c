@@ -26,7 +26,7 @@ void while_short(window_t *window, textures_t *textures, mob_t *mob)
     sfRenderWindow_clear(window->window, sfBlack);
     sfRenderWindow_drawSprite(window->window, textures->game_sprite, NULL);
     sfRenderWindow_drawSprite(window->window, mob->sprite, NULL);
-    mob_animation(mob);
+    mob_animation_classic(mob);
     sfRenderWindow_display(window->window);
 }
 

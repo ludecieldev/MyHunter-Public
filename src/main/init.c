@@ -25,6 +25,9 @@ void init_textures(textures_t *textures)
     textures->game_texture = sfTexture_createFromFile("assets/back.png", NULL);
     textures->game_sprite = sfSprite_create();
     sfSprite_setTexture(textures->game_sprite, textures->game_texture, sfTrue);
+    textures->mouse_scope_texture = sfTexture_createFromFile(
+        "assets/mouse_scope.png", NULL);
+    textures->mouse_scope_sprite = sfSprite_create();
 }
 
 void init_music(music_t *music)
@@ -51,7 +54,6 @@ void init_mob(mob_t *mob)
     sfSprite_setPosition(mob->sprite, (sfVector2f){mob->x, mob->y});
     sfSprite_setTexture(mob->sprite, mob->sprite_texture, sfTrue);
     sfSprite_setTextureRect(mob->sprite, mob->rect);
-    mob->hit = sfMusic_createFromFile("assets/hit.ogg");
 }
 
 int error_texture(textures_t *textures, mob_t *mob)

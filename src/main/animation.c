@@ -9,13 +9,13 @@
 
 #include "../../lib/my/my_hunter.h"
 
-void mob_animation(mob_t *mob)
+void mob_animation_classic(mob_t *mob)
 {
     mob->time = sfClock_getElapsedTime(mob->clock);
     mob->seconds = mob->time.microseconds / 1000000.0;
     if (mob->seconds > 0.1) {
         mob->rect.left += 100;
-        mob->x += 20;
+        mob->x += 25;
         if (mob->rect.left >= 400) {
             mob->rect.left = 0;
         }

@@ -38,6 +38,8 @@ typedef struct textures {
     sfSprite *menu_sprite;
     sfTexture *game_texture;
     sfSprite *game_sprite;
+    sfTexture *mouse_scope_texture;
+    sfSprite *mouse_scope_sprite;
 } textures_t;
 
 typedef struct mob {
@@ -49,7 +51,7 @@ typedef struct mob {
     float y;
     sfTexture *sprite_texture;
     sfSprite *sprite;
-    sfMusic *hit;
+    int nb_hit;
 }mob_t;
 
 typedef struct music {
@@ -71,7 +73,8 @@ void init_textures(textures_t *textures);
 int error_texture(textures_t *textures, mob_t *mob);
 void event_manager(sfRenderWindow *window, sfEvent event, mob_t *mob);
 void init_mob(mob_t *mob);
-void mob_animation(mob_t *mob);
+void mob_animation_classic(mob_t *mob);
 void init_music(music_t *music);
+void random_animation(mob_t *mob);
 
 #endif /* !MY_HUNTER_H_ */
